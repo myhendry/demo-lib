@@ -20,11 +20,11 @@ const Details = ({ network, account }: Props) => {
       <strong className="underline">In Details</strong>
       <p>Metmask Network: {network?.data}</p>
       <p>
-        Env Network: {network.target} in {process.env.NODE_ENV} mode
+        Env Network: {network?.target} in {process.env.NODE_ENV} mode
       </p>
-      <p>Network Supported: {network.isSupported ? "Yes" : "No"}</p>
-      <p>Data: {account.data}</p>
-      {network.hasInitialResponse && !network.isSupported && (
+      <p>Network Supported: {network?.isSupported ? "Yes" : "No"}</p>
+      <p>Data: {account?.data}</p>
+      {network?.hasInitialResponse && !network?.isSupported && (
         <div className="w-full text-white bg-yellow-400">
           <div className="container flex items-center justify-between px-6 py-4 mx-auto">
             <div className="flex">
