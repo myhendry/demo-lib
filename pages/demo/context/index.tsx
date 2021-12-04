@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Layout } from "../../../components/common";
-import { useDemoContext } from "./providers";
+import { useDemoContext } from "../../../components/context/providers";
 
 interface Props {}
 
@@ -9,7 +9,7 @@ interface Props {}
 Provider wrapped Component in _app.tsx
 */
 
-const Index = (props: Props) => {
+const MyContext = (props: Props) => {
   const { text, persons, print } = useDemoContext();
   return (
     <Layout>
@@ -27,4 +27,4 @@ const Index = (props: Props) => {
   );
 };
 
-export default Index;
+export default MyContext;

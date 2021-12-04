@@ -8,7 +8,7 @@ import React, {
 import { useReactToPrint } from "react-to-print";
 
 import { Layout } from "../../../components/common";
-import { ComponentToPrint } from "./item_to_print";
+import ComponentToPrint from "./item_to_print";
 
 export interface FormValues {
   name: string;

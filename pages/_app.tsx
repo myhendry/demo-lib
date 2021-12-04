@@ -5,7 +5,7 @@ import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps /*, AppContext */ } from "next/app";
 
-import { DemoContextProvider } from "./demo/context/providers";
+import { DemoContextProvider } from "../components/context/providers";
 import { Demo2Provider, Web3Provider } from "../components/ethereum/context";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {

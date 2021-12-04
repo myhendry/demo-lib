@@ -14,4 +14,4 @@ const ComponentToPrint = forwardRef<HTMLDivElement, IProps>(({ data }, ref) => {
   );
 });
 
-export { ComponentToPrint };
+export default ComponentToPrint;
