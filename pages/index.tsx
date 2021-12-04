@@ -1,12 +1,27 @@
 import Link from "next/link";
+import { ReactNode } from "react";
 
 import { Layout } from "../components/common";
-//import { Web3Provider } from "./ethereum/context";
+
+interface ILink {
+  url: string;
+  name: string;
+}
 
 export default function Home() {
+  const renderLinks = (links: ILink[]): ReactNode => {
+    console.log("index/renderLinks()");
+    return links.map((link) => (
+      <Link href={link.url}>
+        <a className="cursor-pointer bg-yellow-500 border rounded">
+          {link.name}
+        </a>
+      </Link>
+    ));
+  };
+
   return (
     <Layout>
-      {/* <Web3Provider> */}
       <div className="flex flex-col justify-center text-center">
         <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 m-3">
           <div className="w-2 bg-gray-800 dark:bg-gray-900"></div>
@@ -25,46 +40,62 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col space-y-1">
-          <Link href="/demo/canvas">
-            <a className="cursor-pointer">Canvas</a>
-          </Link>
-          <Link href="/demo/static">
-            <a className="cursor-pointer">Static</a>
-          </Link>
-          <Link href="/demo/swr">
-            <a className="cursor-pointer">SWR</a>
-          </Link>
-          <Link href="/demo/context">
-            <a className="cursor-pointer">React Context</a>
-          </Link>
-          <Link href="/demo/auth">
-            <a className="cursor-pointer">Next-Auth</a>
-          </Link>
-          <Link href="/demo/form">
-            <a className="cursor-pointer">Form</a>
-          </Link>
-          <Link href="/demo/design/merakiui">
-            <a className="cursor-pointer">MerakiUI</a>
-          </Link>
-          <Link href="/demo/spinners">
-            <a className="cursor-pointer">Spinners</a>
-          </Link>
-          <Link href="/demo/images">
-            <a className="cursor-pointer">Images</a>
-          </Link>
-          <Link href="/demo/ethereum">
-            <a className="cursor-pointer">Ethereum</a>
-          </Link>
-          <Link href="/demo/pdf">
-            <a className="cursor-pointer">Pdf</a>
-          </Link>
-          <Link href="/demo/mongodb">
-            <a className="cursor-pointer">MongoDB</a>
-          </Link>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 m-3">
+          {renderLinks(links)}
         </div>
       </div>
-      {/* </Web3Provider> */}
     </Layout>
   );
 }
+
+const links = [
+  {
+    url: "/demo/canvas",
+    name: "Canvas",
+  },
+  {
+    url: "/demo/static",
+    name: "Static",
+  },
+  {
+    url: "/demo/swr",
+    name: "SWR",
+  },
+  {
+    url: "/demo/context",
+    name: "React Context",
+  },
+  {
+    url: "/demo/auth",
+    name: "Next-Auth",
+  },
+  {
+    url: "/demo/form",
+    name: "Form",
+  },
+  {
+    url: "/demo/design/merakiui",
+    name: "MerakiUI",
+  },
+  {
+    url: "/demo/spinners",
+    name: "Spinners",
+  },
+  {
+    url: "/demo/images",
+    name: "Images",
+  },
+  {
+    url: "/demo/ethereum",
+    name: "Ethereum",
+  },
+  {
+    url: "/demo/pdf",
+    name: "Pdf",
+  },
+  {
+    url: "/demo/mongo",
+    name: "Mongo",
+  },
+];
