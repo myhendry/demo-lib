@@ -1,0 +1,48 @@
+{
+  "name": "next-truffle-ts-tw-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS=\"--max_old_space_size=4096\" next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "@next-auth/mongodb-adapter": "^1.0.0",
+    "@openzeppelin/contracts": "^2.5.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "axios": "^0.21.1",
+    "dotenv-safe": "^8.2.0",
+    "formik": "^2.2.9",
+    "mongodb": "^4.2.1",
+    "mongoose": "^5.12.14",
+    "next": "11.0.0",
+    "next-absolute-url": "^1.2.2",
+    "next-auth": "^4.0.2",
+    "next-connect": "^0.10.1",
+    "next-redux-wrapper": "^7.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-loading-skeleton": "^2.2.0",
+    "react-redux": "^7.2.4",
+    "react-to-print": "^2.14.1",
+    "react-toastify": "^7.0.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "swr": "^0.5.6",
+    "web3": "^1.6.1",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@types/dotenv-safe": "^8.1.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/react": "17.0.11",
+    "@types/react-redux": "^7.1.16",
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.2",
+    "typescript": "4.3.4"
+  }
+}
