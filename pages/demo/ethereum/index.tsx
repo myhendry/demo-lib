@@ -1,21 +1,24 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import { Layout } from "../../../components/common";
 import { useWeb3 } from "../../../components/ethereum/context";
 import { useAccount, useNetwork } from "../../../components/ethereum/hooks";
+import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
 import Details from "./details";
 
 interface Props {}
 
-// Solidity & Ethereum in React (Next JS): The Complete Guide
-// NEXT: L153
+interface ICard {
+  title: string;
+  country: string;
+  url: string;
+}
 
 const Ethereum = (props: Props) => {
   const { isLoading, requireInstall, connect, web3 } = useWeb3();
-
   const { account } = useAccount();
-
   const { network } = useNetwork();
+  const { eth } = useEthPrice();
 
   return (
     <Layout>
@@ -87,8 +90,72 @@ const Ethereum = (props: Props) => {
           </div>
         )}
       </div>
+      <div>
+        <p>
+          Current ETH to USD{" "}
+          <strong>{eth.data?.market_data.current_price.usd}</strong>
+        </p>
+        <p>
+          ETH Per Item <strong>{eth.perItem} ETH</strong>
+        </p>
+      </div>
+      <div className="space-y-3">{renderCards(cards)}</div>
     </Layout>
   );
+};
+
+const cards = [
+  {
+    title: "Kryptobirdz",
+    country: "USA",
+    url: "https://images.unsplash.com/photo-1559703248-dcaaec9fab78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    title: "ZDee",
+    country: "Japan",
+    url: "https://images.unsplash.com/photo-1557180295-76eee20ae8aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    title: "AWash",
+    country: "Germany",
+    url: "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    title: "Ahyou",
+    country: "Taiwan",
+    url: "https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+  },
+];
+
+const renderCards = (list: ICard[]): ReactNode => {
+  return list.map((c, i) => (
+    <div
+      key={i}
+      className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    >
+      <img className="object-cover w-full h-56" src={c.url} alt="avatar" />
+
+      <div className="py-5 text-center">
+        <a
+          href="#"
+          className="block text-2xl font-bold text-gray-800 dark:text-white"
+        >
+          {c.title}
+        </a>
+        <span className="text-sm text-gray-700 dark:text-gray-200">
+          {c.country}
+        </span>
+        <div>
+          <button
+            disabled={true}
+            className="px-10 py-2 my-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  ));
 };
 
 export default Ethereum;

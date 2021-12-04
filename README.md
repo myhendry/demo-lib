@@ -1,4 +1,5 @@
-Published on: lab-six.vercel.app
+// Solidity & Ethereum in React (Next JS): The Complete Guide
+// NEXT: L156
 
 [LAB TODOS](#todos)
 
