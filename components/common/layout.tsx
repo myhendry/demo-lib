@@ -12,7 +12,7 @@ const Layout = ({ children, title = "Kitchen HQ" }: any) => {
         <meta name="viewport" content="initial-scale=1.0,width=device-width" />
       </Head>
       <Header />
-      <div>{children}</div>
+      <div className="container">{children}</div>
     </>
   );
 };
