@@ -35,7 +35,7 @@ export default function Home() {
 
             <div className="mx-3">
               <p className="text-gray-600 dark:text-gray-200">
-                Welcome to my Kitchen Sink Page
+                Welcome to my Kitchen Sink Page!
               </p>
             </div>
           </div>
