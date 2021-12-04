@@ -9,7 +9,7 @@ interface IProps {
 const ComponentToPrint = forwardRef<HTMLDivElement, IProps>(({ data }, ref) => {
   return (
     <div ref={ref}>
-      My cool content [{data.name}] [{data.address}] here!
+      My cool content [{data?.name}] [{data?.address}] here!
     </div>
   );
 });
