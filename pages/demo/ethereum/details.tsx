@@ -18,7 +18,7 @@ const Details = ({ network, account }: Props) => {
   return (
     <div className="border rounded p-3 m-2">
       <strong className="underline">In Details</strong>
-      <p>Metmask Network: {network.data}</p>
+      <p>Metmask Network: {network?.data}</p>
       <p>
         Env Network: {network.target} in {process.env.NODE_ENV} mode
       </p>
