@@ -11,8 +11,8 @@ interface ILink {
 export default function Home() {
   const renderLinks = (links: ILink[]): ReactNode => {
     console.log("index/renderLinks()");
-    return links.map((link) => (
-      <Link href={link.url}>
+    return links.map((link, i) => (
+      <Link key={i} href={link.url}>
         <a className="cursor-pointer bg-yellow-500 border rounded">
           {link.name}
         </a>
