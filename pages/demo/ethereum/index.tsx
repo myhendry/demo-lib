@@ -1,9 +1,12 @@
 import React, { ReactNode } from "react";
+import Image from "next/image";
 
 import { Layout } from "../../../components/common";
 import { useWeb3 } from "../../../components/ethereum/context";
 import { useAccount, useNetwork } from "../../../components/ethereum/hooks";
 import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
+import { useWalletInfo } from "../../../components/ethereum/hooks";
+
 import Details from "./details";
 
 interface Props {}
@@ -16,8 +19,7 @@ interface ICard {
 
 const Ethereum = (props: Props) => {
   const { isLoading, requireInstall, connect, web3 } = useWeb3();
-  const { account } = useAccount();
-  const { network } = useNetwork();
+  const { account, network, canPurchaseCourse } = useWalletInfo();
   const { eth } = useEthPrice();
 
   return (
@@ -99,7 +101,7 @@ const Ethereum = (props: Props) => {
           ETH Per Item <strong>{eth.perItem} ETH</strong>
         </p>
       </div>
-      <div className="space-y-3">{renderCards(cards)}</div>
+      <div className="space-y-3">{renderCards(cards, canPurchaseCourse)}</div>
     </Layout>
   );
 };
@@ -127,13 +129,19 @@ const cards = [
   },
 ];
 
-const renderCards = (list: ICard[]): ReactNode => {
+const renderCards = (list: ICard[], canPurchaseCourse: boolean): ReactNode => {
   return list.map((c, i) => (
     <div
       key={i}
       className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
     >
-      <img className="object-cover w-full h-56" src={c.url} alt="avatar" />
+      <Image
+        src={c.url}
+        layout="responsive"
+        width="200"
+        height="150"
+        className={`object-cover ${!canPurchaseCourse && "filter grayscale"}`}
+      />
 
       <div className="py-5 text-center">
         <a
@@ -147,7 +155,7 @@ const renderCards = (list: ICard[]): ReactNode => {
         </span>
         <div>
           <button
-            disabled={true}
+            disabled={!canPurchaseCourse}
             className="px-10 py-2 my-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
           >
             Buy
