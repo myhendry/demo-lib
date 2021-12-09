@@ -1,12 +1,14 @@
 import React from "react";
 
+import { Layout } from "../../../components/common";
+
 interface Props {}
 
 const Mongo = (props: Props) => {
   return (
-    <div>
+    <Layout>
       <p>Mongo</p>
-    </div>
+    </Layout>
   );
 };
 

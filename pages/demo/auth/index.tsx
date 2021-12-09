@@ -3,6 +3,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 import { Layout } from "../../../components/common";
 
+// Difference between cookies, session and tokens
+// https://youtu.be/GhrvZ5nUWNg
+
 interface Props {}
 
 const Auth = (props: Props) => {

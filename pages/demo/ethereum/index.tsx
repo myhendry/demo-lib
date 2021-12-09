@@ -9,6 +9,12 @@ import { useWalletInfo } from "../../../components/ethereum/hooks";
 
 import Details from "./details";
 
+// * Github Repo
+// https://github.com/StephenGrider/EthereumCasts
+
+// * web3 Call() vs Send()
+// https://bitsofco.de/calling-smart-contract-functions-using-web3-js-call-vs-send/
+
 interface Props {}
 
 interface ICard {

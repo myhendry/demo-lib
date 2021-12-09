@@ -83,6 +83,10 @@ const links = [
     name: "Spinners",
   },
   {
+    url: "/demo/routes",
+    name: "Routes",
+  },
+  {
     url: "/demo/images",
     name: "Images",
   },

@@ -59,6 +59,22 @@ const SpinnerLab = (props: Props) => {
         ></div>
         <p>Spinner 3</p>
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <a href="https://tobiasahlin.com/spinkit/" target="_blank">
+          Spinner Collection
+        </a>
+        <p>Spinner 4</p>
+        <div className="spinner1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={`rect-${i}`} className={`rect${i + 1}`} />
+          ))}
+        </div>
+        <div>
+          <p>Spinner 5</p>
+          <div className="spinner2">
+            <div className="cube1"></div>
+            <div className="cube2"></div>
+          </div>
+        </div>
       </div>
     </Layout>
   );
