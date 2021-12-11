@@ -1,13 +1,13 @@
 import { NextPage } from "next";
+import { useRef } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
 import Link from "next/link";
 import * as three from "three";
-
-import { useRef } from "react";
+import { Stats, OrbitControls } from "@react-three/drei";
 
 interface Props {}
 
-const Box = () => {
+const Box = (props: any) => {
   const ref = useRef<three.Mesh>();
   useFrame((state) => {
     ref.current!.rotation.x += 0.01;
@@ -15,7 +15,7 @@ const Box = () => {
   });
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} {...props}>
       <boxBufferGeometry />
       <meshBasicMaterial color={"blue"} />
     </mesh>
@@ -33,8 +33,11 @@ const ThreeD: NextPage<Props> = (props) => {
           <a className="text-white p-2">Go Back</a>
         </Link>
       </div>
-      <Canvas style={{ background: "black" }}>
-        <Box />
+      <Canvas style={{ background: "black" }} camera={{ position: [3, 3, 3] }}>
+        <Stats />
+        <OrbitControls />
+        <Box position={[-1, 1, 2]} />
+        <axesHelper args={[3]} />
       </Canvas>
     </div>
   );
