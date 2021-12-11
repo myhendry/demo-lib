@@ -1,10 +1,27 @@
 import { NextPage } from "next";
-import { Canvas } from "react-three-fiber";
+import { Canvas, useFrame } from "react-three-fiber";
 import Link from "next/link";
+import * as three from "three";
 
 import { Layout } from "../../../components/common";
+import { useRef } from "react";
 
 interface Props {}
+
+const Box = () => {
+  const ref = useRef<three.Mesh>();
+  useFrame((state) => {
+    ref.current!.rotation.x += 0.01;
+    ref.current!.rotation.y += 0.01;
+  });
+
+  return (
+    <mesh ref={ref}>
+      <boxBufferGeometry />
+      <meshBasicMaterial color={"blue"} />
+    </mesh>
+  );
+};
 
 const ThreeD: NextPage<Props> = (props) => {
   // https://threejs.org/manual/#en/fundamentals
@@ -16,10 +33,7 @@ const ThreeD: NextPage<Props> = (props) => {
         <a>Go Back</a>
       </Link>
       <Canvas style={{ background: "black" }}>
-        <mesh>
-          <boxBufferGeometry />
-          <meshBasicMaterial color={"blue"} />
-        </mesh>
+        <Box />
       </Canvas>
     </div>
   );
