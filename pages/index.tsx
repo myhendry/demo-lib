@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { GiSoccerBall } from "react-icons/gi";
 
 import { Layout } from "../components/common";
 
@@ -36,6 +38,42 @@ export default function Home() {
               <p className="text-gray-600 dark:text-gray-200">
                 Welcome to my Kitchen Sink Page!
               </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+            <Image
+              src={"https://avatars.githubusercontent.com/u/20642843?v=4"}
+              width="500"
+              height="400"
+              layout="fixed"
+              alt="avatar"
+            />
+
+            <div className="py-5 text-center">
+              <a
+                href="#"
+                className="block text-2xl font-bold text-gray-800 dark:text-white"
+              >
+                Hendry Lim
+              </a>
+              <span className="text-sm text-gray-700 dark:text-gray-200">
+                Coding Enthusiast
+              </span>
+              <div className="flex justify-center items-center space-x-2">
+                <span>
+                  <GiSoccerBall className="text-yellow-700" />
+                </span>
+                <a
+                  href="https://github.com/myhendry/lab"
+                  target="_blank"
+                  className="cursor-pointer text-sm text-yellow-700"
+                >
+                  Visit Github Repository
+                </a>
+              </div>
             </div>
           </div>
         </div>
