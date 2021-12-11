@@ -10,7 +10,6 @@ interface ILink {
 
 export default function Home() {
   const renderLinks = (links: ILink[]): ReactNode => {
-    console.log("index/renderLinks()");
     return links.map((link, i) => (
       <Link key={i} href={link.url}>
         <a className="cursor-pointer bg-yellow-500 border rounded">
@@ -101,5 +100,9 @@ const links = [
   {
     url: "/demo/mongo",
     name: "Mongo",
+  },
+  {
+    url: "/demo/three-d",
+    name: "3D",
   },
 ];
