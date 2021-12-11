@@ -3,7 +3,6 @@ import { Canvas, useFrame } from "react-three-fiber";
 import Link from "next/link";
 import * as three from "three";
 
-import { Layout } from "../../../components/common";
 import { useRef } from "react";
 
 interface Props {}
@@ -29,9 +28,11 @@ const ThreeD: NextPage<Props> = (props) => {
 
   return (
     <div style={{ width: "100vw", height: "100vw" }}>
-      <Link href={"/"}>
-        <a>Go Back</a>
-      </Link>
+      <div className="flex justify-end cursor-pointer bg-black">
+        <Link href={"/"}>
+          <a className="text-white p-2">Go Back</a>
+        </Link>
+      </div>
       <Canvas style={{ background: "black" }}>
         <Box />
       </Canvas>
