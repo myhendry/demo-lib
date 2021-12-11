@@ -1,3 +1,5 @@
+import { Db } from "mongodb";
+import { NextApiRequest } from "next";
 export interface IComment {
   _id: string;
   comment: string;
@@ -17,4 +19,8 @@ export interface IProject {
   categories: ICategory[];
   top: boolean;
   comments: IComment[];
+}
+
+export interface NextApiExtendedRequest extends NextApiRequest {
+  db: Db;
 }
