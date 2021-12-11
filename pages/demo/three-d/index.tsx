@@ -27,7 +27,7 @@ const ThreeD: NextPage<Props> = (props) => {
   // https://github.com/pmndrs/react-three-fiber
 
   return (
-    <div style={{ width: "100vw", height: "100vw" }}>
+    <div className="h-screen w-screen">
       <div className="flex justify-end cursor-pointer bg-black">
         <Link href={"/"}>
           <a className="text-white p-2">Go Back</a>
