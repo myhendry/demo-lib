@@ -1,6 +1,7 @@
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
-import ErrorHandler from "../utils/ErrorHandler";
+
+import ErrorHandler from "../../lib/ErrorHandler";
 
 export default (
   err: any,
