@@ -176,10 +176,10 @@ const Box3 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={active ? 1.5 : 1}
+      scale={active ? 1 : 1.5}
     >
       <boxBufferGeometry />
-      <meshBasicMaterial color="yellow" />
+      <meshBasicMaterial color={active ? "yellow" : "red"} />
     </mesh>
   );
 };
@@ -224,15 +224,15 @@ const ThreeD: NextPage<Props> = (props) => {
       </div>
       <div className="absolute z-10 p-2 space-y-2">
         <div
-          className="border h-8 w-8 rounded-md bg-blue-600"
+          className="border h-8 w-8 rounded-md bg-blue-600 cursor-pointer"
           onClick={() => handleClick("blue")}
         ></div>
         <div
-          className="border h-8 w-8 rounded-md bg-red-600"
+          className="border h-8 w-8 rounded-md bg-red-600 cursor-pointer"
           onClick={() => handleClick("red")}
         ></div>
         <div
-          className="border h-8 w-8 rounded-md bg-yellow-300"
+          className="border h-8 w-8 rounded-md bg-yellow-300 cursor-pointer"
           onClick={() => handleClick("yellow")}
         ></div>
       </div>
