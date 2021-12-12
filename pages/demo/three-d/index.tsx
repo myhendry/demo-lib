@@ -11,14 +11,35 @@ interface Props {}
 const Box = (props: any) => {
   const ref = useRef<THREE.Mesh>();
   useFrame((state) => {
-    ref.current!.rotation.x += 0.01;
+    // ref.current!.rotation.x += 0.01;
     ref.current!.rotation.y += 0.01;
   });
 
   return (
-    <mesh ref={ref} {...props} castShadow receiveShadow>
+    <mesh
+      ref={ref}
+      {...props}
+      castShadow
+      // receiveShadow
+    >
       <boxBufferGeometry />
-      <meshPhysicalMaterial color={"blue"} />
+      <meshPhysicalMaterial
+        color={"white"}
+        // opacity={0.5}
+        // transparent // needed for opacity
+        // fog={false}
+        // visible={false}
+        // wireframe
+        // metalness={1}
+        roughness={0} // default is 1
+        clearcoat={1}
+        transmission={1} // suitable for glass or semi transparent material. the higher the transmission, the more see through
+        transparent // needed for transmission
+        reflectivity={1}
+        side={THREE.DoubleSide}
+      />
+
+      {/* MeshStandardMaterial inherits from MeshPhysicalMaterial but it is more demanding on system */}
     </mesh>
   );
 };
@@ -56,14 +77,14 @@ const ThreeD: NextPage<Props> = (props) => {
       <Canvas
         shadows
         style={{ background: "black" }}
-        camera={{ position: [3, 3, 3] }}
+        camera={{ position: [1, 5, 1] }}
       >
+        {/* <fog attach="fog" args={["white", 1, 10]} /> */}
         <ambientLight intensity={0.2} />
-
         <Bulb position={[0, 3, 0]} />
         <Stats />
         <OrbitControls />
-        <Box position={[-1, 1, 2]} />
+        <Box position={[0, 1, 0]} />
         <Floor postition={[0, -0.5, 0]} />
         <axesHelper args={[3]} />
       </Canvas>
