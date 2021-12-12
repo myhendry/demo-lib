@@ -4,7 +4,7 @@ import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import Link from "next/link";
 import * as THREE from "three";
 import { Stats, OrbitControls } from "@react-three/drei";
-import { useSpring, animated } from "@react-spring/three";
+import { useSpring, animated, config } from "@react-spring/three";
 
 import useStore from "../../../store";
 import Dragable from "../../../components/three-d/Dragable";
@@ -219,11 +219,11 @@ const Box5 = (props: any) => {
     setActive(!active);
   };
 
-  const ref = useRef<THREE.Mesh>();
+  const ref = useRef<THREE.Mesh>(null!);
 
   useFrame((state) => {
     // ref.current!.rotation.x += 0.01;
-    ref.current!.rotation.y += 0.01;
+    ref.current.rotation.y += 0.01;
   });
 
   return (
@@ -243,7 +243,10 @@ const Box5 = (props: any) => {
 const Box6 = (props: any) => {
   const ref = useRef<THREE.Mesh>();
   const [active, setActive] = useState<boolean>(false);
-  const { scale } = useSpring({ scale: active ? 1.5 : 1 });
+  const { scale } = useSpring({
+    scale: active ? 1.5 : 1,
+    config: config.wobbly,
+  });
 
   // ! For state management, one option is use Zustand without setting state
   const handlePointerDown = (e: any) => {
