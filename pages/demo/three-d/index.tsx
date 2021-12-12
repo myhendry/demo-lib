@@ -1,11 +1,12 @@
 import { NextPage } from "next";
 import { Suspense, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader, useThree } from "react-three-fiber";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import Link from "next/link";
 import * as THREE from "three";
 import { Stats, OrbitControls } from "@react-three/drei";
+import { useSpring, animated } from "@react-spring/three";
 
-import useStore from "../../../components/three-d/store";
+import useStore from "../../../store";
 import Dragable from "../../../components/three-d/Dragable";
 
 // todo other than zustand for state management, can we also use react-context to manage state in react-three-fiber?
@@ -29,7 +30,7 @@ const Background = (props: any) => {
   return <primitive attach="background" object={formatted.texture} />;
 };
 
-const Sphere = (props: any) => {
+const Sphere1 = (props: any) => {
   const ref = useRef<THREE.Mesh>();
   // ! Texture Loader
   const texture = useLoader(THREE.TextureLoader, "/images/wood.jpg");
@@ -106,7 +107,7 @@ const Box1 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={active ? 1.5 : 1}
+      scale={active ? 1.1 : 1}
     >
       <boxBufferGeometry />
       <meshPhysicalMaterial map={texture} />
@@ -135,7 +136,7 @@ const Box2 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={active ? 1.5 : 1}
+      scale={active ? 1.1 : 1}
     >
       <boxBufferGeometry />
       <meshPhysicalMaterial
@@ -172,7 +173,7 @@ const Box3 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={active ? 1 : 1.5}
+      scale={active ? 1.1 : 1}
     >
       <boxBufferGeometry />
       <meshBasicMaterial color={active ? "yellow" : "red"} />
@@ -201,10 +202,10 @@ const Box4 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={status ? 1 : 1.5}
+      scale={status ? 1.1 : 1}
     >
       <boxBufferGeometry />
-      <meshBasicMaterial color={status ? "blue" : "green"} />
+      <meshBasicMaterial color={status ? "yellow" : "green"} />
     </mesh>
   );
 };
@@ -231,11 +232,40 @@ const Box5 = (props: any) => {
       {...props}
       castShadow
       onPointerDown={handlePointerDown}
-      scale={active ? 1 : 1.5}
+      scale={active ? 1.1 : 1}
     >
       <boxBufferGeometry />
       <meshBasicMaterial color={color} />
     </mesh>
+  );
+};
+
+const Box6 = (props: any) => {
+  const ref = useRef<THREE.Mesh>();
+  const [active, setActive] = useState<boolean>(false);
+  const { scale } = useSpring({ scale: active ? 1.5 : 1 });
+
+  // ! For state management, one option is use Zustand without setting state
+  const handlePointerDown = (e: any) => {
+    setActive(!active);
+  };
+
+  useFrame((state) => {
+    // ref.current!.rotation.x += 0.01;
+    ref.current!.rotation.y += 0.01;
+  });
+
+  return (
+    <animated.mesh
+      ref={ref}
+      {...props}
+      castShadow
+      scale={scale}
+      onPointerDown={handlePointerDown}
+    >
+      <boxBufferGeometry />
+      <meshBasicMaterial color="white" />
+    </animated.mesh>
   );
 };
 
@@ -325,9 +355,12 @@ const ThreeD: NextPage<Props> = (props) => {
             <Box1 position={[0, 1.5, 0]} />
           </Suspense>
           <Suspense fallback={null}>
-            <Sphere position={[2, 1.5, 0]} />
+            <Sphere1 position={[2, 1.5, 0]} />
           </Suspense>
         </Dragable>
+        <Suspense fallback={null}>
+          <Box6 position={[0, 1.5, 2]} />
+        </Suspense>
 
         <Floor postition={[0, 0, 0]} />
         <axesHelper args={[3]} />
