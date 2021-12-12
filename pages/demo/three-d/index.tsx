@@ -1,10 +1,19 @@
 import { NextPage } from "next";
-import { Suspense, useRef } from "react";
+import { Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "react-three-fiber";
 import Link from "next/link";
 import * as THREE from "three";
+//import dynamic from "next/dynamic";
+// const OrbitControls = dynamic(
+//   //@ts-ignore
+//   () => import("three/examples/jsm/controls/OrbitControls"),
+//   { ssr: false }
+// );
+//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+// extend(OrbitControls);
+// import { Color } from "three";
+//import Dragable from "../../../components/three-d/Draggable";
 import { Stats, OrbitControls } from "@react-three/drei";
-import { Color } from "three";
 
 interface Props {}
 
@@ -13,9 +22,13 @@ const Background = (props: any) => {
 
   const { gl } = useThree();
 
-  const formatted = new THREE.WebGLCubeRenderTarget(
-    texture.image.height
-  ).fromEquirectangularTexture(gl, texture);
+  const formatted = useMemo(
+    () =>
+      new THREE.WebGLCubeRenderTarget(
+        texture.image.height
+      ).fromEquirectangularTexture(gl, texture),
+    [gl, texture]
+  );
 
   return <primitive attach="background" object={formatted.texture} />;
 };
@@ -35,40 +48,26 @@ const Sphere = (props: any) => {
       {...props}
       castShadow
       // receiveShadow
+      // onClick?: (event: ThreeEvent<MouseEvent>) => void
+      // onContextMenu?: (event: ThreeEvent<MouseEvent>) => void
+      // onDoubleClick?: (event: ThreeEvent<MouseEvent>) => void
+      // onPointerUp?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerDown?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerOver?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerOut?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerEnter?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerLeave?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerMove?: (event: ThreeEvent<PointerEvent>) => void
+      // onPointerMissed?: (event: MouseEvent) => void
+      // onPointerCancel?: (event: ThreeEvent<PointerEvent>) => void
+      // onWheel?: (event: ThreeEvent<WheelEvent>) => void
     >
       <sphereBufferGeometry args={[1, 100, 100]} />
       <meshPhysicalMaterial
         // ! Texture
         map={texture}
-      />
-
-      {/* MeshStandardMaterial inherits from MeshPhysicalMaterial but it is more demanding on system */}
-    </mesh>
-  );
-};
-
-const Box = (props: any) => {
-  const ref = useRef<THREE.Mesh>();
-  // ! Texture Loader
-  const texture = useLoader(THREE.TextureLoader, "/images/wood.jpg");
-  useFrame((state) => {
-    // ref.current!.rotation.x += 0.01;
-    ref.current!.rotation.y += 0.01;
-  });
-
-  return (
-    <mesh
-      ref={ref}
-      {...props}
-      castShadow
-      // receiveShadow
-    >
-      <boxBufferGeometry />
-      <meshPhysicalMaterial
-        // ! Texture
-        // Custom Objects from Blender should apply UV Mapping for it to work well, that means to show the texture better
-        map={texture}
         // ! Materials
+        // Custom Objects from Blender should apply UV Mapping for it to work well, that means to show the texture better
         // color={"white"}
         // opacity={0.5}
         // transparent // needed for opacity
@@ -89,6 +88,28 @@ const Box = (props: any) => {
   );
 };
 
+// ! For state management, one option is use Zustand without setting state
+const handlePointerDown = (e: any) => {
+  console.log(e);
+};
+
+const Box = (props: any) => {
+  const ref = useRef<THREE.Mesh>();
+  // ! Texture Loader
+  const texture = useLoader(THREE.TextureLoader, "/images/wood.jpg");
+  useFrame((state) => {
+    // ref.current!.rotation.x += 0.01;
+    ref.current!.rotation.y += 0.01;
+  });
+
+  return (
+    <mesh ref={ref} {...props} castShadow onPointerDown={handlePointerDown}>
+      <boxBufferGeometry />
+      <meshPhysicalMaterial map={texture} />
+    </mesh>
+  );
+};
+
 const Floor = (props: any) => {
   return (
     <mesh {...props} receiveShadow>
@@ -103,7 +124,7 @@ const Bulb = (props: any) => {
     <mesh {...props}>
       <pointLight castShadow />
       <sphereBufferGeometry args={[0.2, 20, 20]} />
-      <meshPhongMaterial emissive={new Color(0xff0000)} />
+      <meshPhongMaterial emissive={new THREE.Color(0xff0000)} />
     </mesh>
   );
 };
@@ -133,6 +154,7 @@ const ThreeD: NextPage<Props> = (props) => {
         <Suspense fallback={null}>
           <Background />
         </Suspense>
+
         <Suspense fallback={null}>
           <Box position={[0, 1.5, 0]} />
         </Suspense>
@@ -140,7 +162,7 @@ const ThreeD: NextPage<Props> = (props) => {
           <Sphere position={[2, 1.5, 0]} />
         </Suspense>
 
-        <Floor postition={[0, -1, 0]} />
+        <Floor postition={[0, 0, 0]} />
         <axesHelper args={[3]} />
       </Canvas>
     </div>
