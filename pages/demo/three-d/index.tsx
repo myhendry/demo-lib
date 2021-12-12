@@ -14,6 +14,7 @@ import * as THREE from "three";
 // import { Color } from "three";
 //import Dragable from "../../../components/three-d/Draggable";
 import { Stats, OrbitControls } from "@react-three/drei";
+import useStore from "../../../components/three-d/store";
 
 interface Props {}
 
@@ -184,6 +185,35 @@ const Box3 = (props: any) => {
   );
 };
 
+const Box4 = (props: any) => {
+  const { status, setStatus } = useStore((state) => state);
+
+  // ! For state management, one option is use Zustand without setting state
+  const handlePointerDown = (e: any) => {
+    setStatus();
+  };
+
+  const ref = useRef<THREE.Mesh>();
+
+  useFrame((state) => {
+    // ref.current!.rotation.x += 0.01;
+    ref.current!.rotation.y += 0.01;
+  });
+
+  return (
+    <mesh
+      ref={ref}
+      {...props}
+      castShadow
+      onPointerDown={handlePointerDown}
+      scale={status ? 1 : 1.5}
+    >
+      <boxBufferGeometry />
+      <meshBasicMaterial color={status ? "blue" : "green"} />
+    </mesh>
+  );
+};
+
 const Floor = (props: any) => {
   return (
     <mesh {...props} receiveShadow>
@@ -259,6 +289,9 @@ const ThreeD: NextPage<Props> = (props) => {
         </Suspense>
         <Suspense fallback={null}>
           <Box3 position={[-4, 1.5, 0]} />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Box4 position={[-6, 1.5, 0]} />
         </Suspense>
         <Suspense fallback={null}>
           <Sphere position={[2, 1.5, 0]} />
