@@ -3,18 +3,12 @@ import { Suspense, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "react-three-fiber";
 import Link from "next/link";
 import * as THREE from "three";
-//import dynamic from "next/dynamic";
-// const OrbitControls = dynamic(
-//   //@ts-ignore
-//   () => import("three/examples/jsm/controls/OrbitControls"),
-//   { ssr: false }
-// );
-//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-// extend(OrbitControls);
-// import { Color } from "three";
-//import Dragable from "../../../components/three-d/Draggable";
 import { Stats, OrbitControls } from "@react-three/drei";
+
 import useStore from "../../../components/three-d/store";
+
+// todo other than zustand for state management, can we also use react-context to manage state in react-three-fiber?
+// todo react-spring vs useCannons which one should we use?
 
 interface Props {}
 
@@ -214,6 +208,36 @@ const Box4 = (props: any) => {
   );
 };
 
+const Box5 = (props: any) => {
+  const { color } = useStore();
+  const [active, setActive] = useState<boolean>(false);
+
+  // ! For state management, one option is use Zustand without setting state
+  const handlePointerDown = (e: any) => {
+    setActive(!active);
+  };
+
+  const ref = useRef<THREE.Mesh>();
+
+  useFrame((state) => {
+    // ref.current!.rotation.x += 0.01;
+    ref.current!.rotation.y += 0.01;
+  });
+
+  return (
+    <mesh
+      ref={ref}
+      {...props}
+      castShadow
+      onPointerDown={handlePointerDown}
+      scale={active ? 1 : 1.5}
+    >
+      <boxBufferGeometry />
+      <meshBasicMaterial color={color} />
+    </mesh>
+  );
+};
+
 const Floor = (props: any) => {
   return (
     <mesh {...props} receiveShadow>
@@ -241,8 +265,10 @@ const ThreeD: NextPage<Props> = (props) => {
   // https://threejs.org/manual/#en/fundamentals
   // https://github.com/pmndrs/react-three-fiber
 
+  const { setColor } = useStore();
+
   const handleClick = (color: string) => {
-    console.log("handle click");
+    setColor(color);
   };
 
   return (
@@ -292,6 +318,9 @@ const ThreeD: NextPage<Props> = (props) => {
         </Suspense>
         <Suspense fallback={null}>
           <Box4 position={[-6, 1.5, 0]} />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Box5 position={[-8, 1.5, 0]} />
         </Suspense>
         <Suspense fallback={null}>
           <Sphere position={[2, 1.5, 0]} />
