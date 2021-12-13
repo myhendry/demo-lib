@@ -7,12 +7,11 @@ interface Props {
   children: any;
 }
 
-const Dragable = (props: Props) => {
+const Draggable = (props: Props) => {
   // console.log(props.children)
   const groupRef = useRef<any>();
   const controlsRef = useRef<DragControls>();
   const [children, setChildren] = useState<any[]>([]);
-
   const { camera, gl, scene } = useThree();
   // console.log(groupRef.current);
 
@@ -26,9 +25,26 @@ const Dragable = (props: Props) => {
       when we addEventListener, the setChildren has not been set yet
       hence need to use separate useEffect
     */
-    console.log(controlsRef.current);
+    console.log("cref", controlsRef.current);
+    //controlsRef.current!.enabled;
     controlsRef.current!.addEventListener("hoveron", (e) => {
-      console.log("scene", scene);
+      // @ts-ignore
+      scene.orbitControls.enabled = false;
+    });
+    controlsRef.current!.addEventListener("hoveroff", (e) => {
+      // @ts-ignore
+      scene.orbitControls.enabled = true;
+    });
+    controlsRef.current!.addEventListener("dragstart", (e) => {
+      console.log(e.object);
+      e.object.api?.mass.set(0);
+    });
+    controlsRef.current!.addEventListener("dragend", (e) =>
+      e.object.api?.mass.set(1)
+    );
+    controlsRef.current!.addEventListener("drag", (e) => {
+      e.object.api?.position.copy(e.object.position);
+      e.object.api?.velocity.set(0, 0, 0);
     });
   }, [children]);
 
@@ -44,4 +60,4 @@ const Dragable = (props: Props) => {
   );
 };
 
-export default Dragable;
+export default Draggable;

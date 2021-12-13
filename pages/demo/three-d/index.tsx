@@ -7,10 +7,15 @@ import { Stats, OrbitControls } from "@react-three/drei";
 import { useSpring, animated, config } from "@react-spring/three";
 
 import useStore from "../../../store";
-import Dragable from "../../../components/three-d/Dragable";
+import Draggable from "../../../components/three-d/Draggable";
 
 // todo other than zustand for state management, can we also use react-context to manage state in react-three-fiber?
+// there are issues when using react context for state management with react-three-fiber
+// zustand is built with react-three-fiber in mind
 // todo react-spring vs useCannons which one should we use?
+// react-spring is for animation
+// useCannons is for physics and collision detection
+// they both serve different purposes
 
 interface Props {}
 
@@ -336,7 +341,7 @@ const ThreeD: NextPage<Props> = (props) => {
         <ambientLight intensity={0.2} />
         <Bulb position={[0, 3, 0]} />
         <Stats />
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         <Suspense fallback={null}>
           <Background />
         </Suspense>
@@ -353,14 +358,14 @@ const ThreeD: NextPage<Props> = (props) => {
         <Suspense fallback={null}>
           <Box5 position={[-8, 1.5, 0]} />
         </Suspense>
-        <Dragable>
+        <Draggable>
           <Suspense fallback={null}>
             <Box1 position={[0, 1.5, 0]} />
           </Suspense>
           <Suspense fallback={null}>
             <Sphere1 position={[2, 1.5, 0]} />
           </Suspense>
-        </Dragable>
+        </Draggable>
         <Suspense fallback={null}>
           <Box6 position={[0, 1.5, 2]} />
         </Suspense>
