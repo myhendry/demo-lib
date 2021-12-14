@@ -370,19 +370,19 @@ const ThreeD: NextPage<Props> = (props) => {
           <Suspense fallback={null}>
             <Model
               path="/images/tesla_model_s/scene.gltf"
-              position={[8, 0.7, 1]}
+              position={[0, 0.7, 1]}
               scale={new Array(3).fill(0.01)}
             />
           </Suspense>
           <Suspense fallback={null}>
-            <Box1 position={[0, 1.5, 0]} />
+            <Box1 position={[8, 1.5, 0]} />
           </Suspense>
           <Suspense fallback={null}>
-            <Sphere1 position={[2, 1.5, 0]} />
+            <Sphere1 position={[8, 1.5, 2]} />
           </Suspense>
         </Draggable>
         <Suspense fallback={null}>
-          <Box6 position={[0, 1.5, 2]} />
+          <Box6 position={[-5, 1.5, 2]} />
         </Suspense>
 
         <Floor postition={[0, 0, 0]} />
