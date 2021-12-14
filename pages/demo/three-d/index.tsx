@@ -341,7 +341,7 @@ const ThreeD: NextPage<Props> = (props) => {
         <ambientLight intensity={0.2} />
         <Bulb position={[0, 3, 0]} />
         <Stats />
-        <OrbitControls />
+        <OrbitControls attach="orbitControls" />
         <Suspense fallback={null}>
           <Background />
         </Suspense>

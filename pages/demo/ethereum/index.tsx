@@ -1,12 +1,11 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
+import axios from "axios";
 
 import { Layout } from "../../../components/common";
 import { useWeb3 } from "../../../components/ethereum/context";
-import { useAccount, useNetwork } from "../../../components/ethereum/hooks";
 import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
 import { useWalletInfo } from "../../../components/ethereum/hooks";
-
 import Details from "./details";
 
 // * Github Repo
@@ -27,6 +26,39 @@ const Ethereum = (props: Props) => {
   const { isLoading, requireInstall, connect, web3 } = useWeb3();
   const { account, network, canPurchaseCourse } = useWalletInfo();
   const { eth } = useEthPrice();
+  const [demoId, setDemoId] = useState<string | null>();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get<{ _id: string; name: string; age: number }>(
+          "/api/demo/61b46e424fa6d33e76723a6e"
+        );
+        setDemoId(res.data._id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  console.log(demoId);
+  /*
+      The prefix 0x is used in code to indicate that the number is being written in hex. ... The hexadecimal format has a base of 16, which means that each digit can represent up to 16 different values.
+  */
+  const demoIdHex = web3 && web3.utils.utf8ToHex(demoId!);
+  console.log("demoIdHex", demoIdHex);
+
+  // const orderHash =
+  //   web3 &&
+  //   web3.utils.soliditySha3(
+  //     { type: "bytes16", value: demoIdHex },
+  //     { type: "address", value: account.data }
+  //   );
+  // console.log("orderHash", orderHash);
+
+  const emailHash = web3 && web3.utils.sha3("lim@gx.com");
+  console.log("emailHash", emailHash);
 
   return (
     <Layout>

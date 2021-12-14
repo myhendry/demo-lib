@@ -115,10 +115,10 @@ export const createNetworkHook = (web3?: Web3, provider?: any) => () => {
   const ENV_CHAIN_ID: keyof typeof NETWORKS = parseInt(
     process.env.NEXT_PUBLIC_TARGET_CHAIN_ID!
   );
-  console.log("env chain id", ENV_CHAIN_ID);
+  // console.log("env chain id", ENV_CHAIN_ID);
 
   const targetNetwork = NETWORKS[ENV_CHAIN_ID];
-  console.log("dev tn", targetNetwork);
+  // console.log("dev tn", targetNetwork);
 
   useEffect(() => {
     provider &&

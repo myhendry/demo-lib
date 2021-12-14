@@ -9,7 +9,7 @@ export const useEthPrice = () => {
   const { data, ...rest } = useSWR<{
     market_data: { current_price: { usd: string } };
   }>(URL, { refreshInterval: 10000 });
-  console.log("d", data?.market_data.current_price.usd);
+  // console.log("d", data?.market_data.current_price.usd);
   const perItem =
     (data?.market_data.current_price.usd &&
       COURSE_PRICE / Number(data?.market_data.current_price.usd)) ??

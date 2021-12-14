@@ -28,6 +28,7 @@ const Draggable = (props: Props) => {
     console.log("cref", controlsRef.current);
     //controlsRef.current!.enabled;
     controlsRef.current!.addEventListener("hoveron", (e) => {
+      console.log("scene", scene);
       // @ts-ignore
       scene.orbitControls.enabled = false;
     });
@@ -35,17 +36,18 @@ const Draggable = (props: Props) => {
       // @ts-ignore
       scene.orbitControls.enabled = true;
     });
-    controlsRef.current!.addEventListener("dragstart", (e) => {
-      console.log(e.object);
-      e.object.api?.mass.set(0);
-    });
-    controlsRef.current!.addEventListener("dragend", (e) =>
-      e.object.api?.mass.set(1)
-    );
-    controlsRef.current!.addEventListener("drag", (e) => {
-      e.object.api?.position.copy(e.object.position);
-      e.object.api?.velocity.set(0, 0, 0);
-    });
+    // controlsRef.current!.addEventListener("dragstart", (e) => {
+    //   console.log(e.object);
+    //   console.log("scene", scene);
+    //   e.object.api?.mass.set(0);
+    // });
+    // controlsRef.current!.addEventListener("dragend", (e) =>
+    //   e.object.api?.mass.set(1)
+    // );
+    // controlsRef.current!.addEventListener("drag", (e) => {
+    //   e.object.api?.position.copy(e.object.position);
+    //   e.object.api?.velocity.set(0, 0, 0);
+    // });
   }, [children]);
 
   return (
