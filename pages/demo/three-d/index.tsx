@@ -8,6 +8,7 @@ import { useSpring, animated, config } from "@react-spring/three";
 
 import useStore from "../../../store";
 import Draggable from "../../../components/three-d/Draggable";
+import Model from "../../../components/three-d/Model";
 
 // todo other than zustand for state management, can we also use react-context to manage state in react-three-fiber?
 // there are issues when using react context for state management with react-three-fiber
@@ -359,6 +360,13 @@ const ThreeD: NextPage<Props> = (props) => {
           <Box5 position={[-8, 1.5, 0]} />
         </Suspense>
         <Draggable>
+          <Suspense fallback={null}>
+            <Model
+              path="/images/tesla_model_3/scene.gltf"
+              position={[5, 1.5, 1]}
+              scale={new Array(3).fill(0.01)}
+            />
+          </Suspense>
           <Suspense fallback={null}>
             <Box1 position={[0, 1.5, 0]} />
           </Suspense>

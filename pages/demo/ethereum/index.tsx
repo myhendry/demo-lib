@@ -7,6 +7,7 @@ import { useWeb3 } from "../../../components/ethereum/context";
 import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
 import { useWalletInfo } from "../../../components/ethereum/hooks";
 import Details from "./details";
+import { ObjectId } from "mongodb";
 
 // * Github Repo
 // https://github.com/StephenGrider/EthereumCasts
@@ -49,13 +50,13 @@ const Ethereum = (props: Props) => {
   const demoIdHex = web3 && web3.utils.utf8ToHex(demoId!);
   console.log("demoIdHex", demoIdHex);
 
-  // const orderHash =
-  //   web3 &&
-  //   web3.utils.soliditySha3(
-  //     { type: "bytes16", value: demoIdHex },
-  //     { type: "address", value: account.data }
-  //   );
-  // console.log("orderHash", orderHash);
+  const orderHash =
+    web3 &&
+    web3.utils.soliditySha3(
+      { type: "bytes16", value: demoIdHex },
+      { type: "address", value: account.data }
+    );
+  console.log("orderHash", orderHash);
 
   const emailHash = web3 && web3.utils.sha3("lim@gx.com");
   console.log("emailHash", emailHash);

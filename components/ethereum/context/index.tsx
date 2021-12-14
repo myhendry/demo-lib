@@ -13,7 +13,7 @@ import { loadContract } from "../../../lib/eth/loadContract";
 
 interface IWeb3Context {
   provider: any;
-  web3: Web3 | null;
+  web3: any;
   contract: any;
   isLoading: boolean;
   hooks: any;
@@ -21,7 +21,7 @@ interface IWeb3Context {
 
 interface IWeb3ExtendedContext {
   provider: any;
-  web3: any;
+  web3: Web3;
   //todo resolve typing for getHooks to use with swr
   // getHooks: () => any;
   //! below typing appropriate when using with useState only in useAccount
