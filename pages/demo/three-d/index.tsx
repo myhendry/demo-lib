@@ -363,7 +363,14 @@ const ThreeD: NextPage<Props> = (props) => {
           <Suspense fallback={null}>
             <Model
               path="/images/tesla_model_3/scene.gltf"
-              position={[5, 1.5, 1]}
+              position={[5, 1, 1]}
+              scale={new Array(3).fill(0.01)}
+            />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Model
+              path="/images/tesla_model_s/scene.gltf"
+              position={[8, 0.7, 1]}
               scale={new Array(3).fill(0.01)}
             />
           </Suspense>
