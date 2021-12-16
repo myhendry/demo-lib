@@ -7,7 +7,10 @@ interface Props {
   [x: string]: any;
 }
 
+// https://sketchfab.com/
 const Model = ({ path, ...props }: Props) => {
+  //console.log("props", props);
+
   const model = useLoader(GLTFLoader, path);
 
   return <primitive object={model.scene} {...props} />;

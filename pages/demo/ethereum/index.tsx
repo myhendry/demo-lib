@@ -5,9 +5,11 @@ import axios from "axios";
 import { Layout } from "../../../components/common";
 import { useWeb3 } from "../../../components/ethereum/context";
 import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
-import { useWalletInfo } from "../../../components/ethereum/hooks";
+import {
+  useOwnedCourses,
+  useWalletInfo,
+} from "../../../components/ethereum/hooks";
 import Details from "./details";
-import { ObjectId } from "mongodb";
 
 // * Github Repo
 // https://github.com/StephenGrider/EthereumCasts
@@ -28,6 +30,9 @@ const Ethereum = (props: Props) => {
   const { account, network, canPurchaseCourse } = useWalletInfo();
   const { eth } = useEthPrice();
   const [demoId, setDemoId] = useState<string | null>();
+  const { ownedCourses } = useOwnedCourses();
+
+  console.log("ownedCourses", ownedCourses.data);
 
   useEffect(() => {
     const getData = async () => {
@@ -43,27 +48,43 @@ const Ethereum = (props: Props) => {
     getData();
   }, []);
 
-  console.log(demoId);
-  /*
+  const purchaseCourse = () => {
+    /*
+        https://web.stanford.edu/class/cs101/bits-bytes.html    
+        1 bit = 0 or 1 single bit can represent 2 ** 1 = 2 nums
+        2 bits can represent 00, 01, 10, 11, 2 bits = 2 ** 2 = 4 nums
+        3 bits = 2 ** 3 = 8 nums   
+        4 bits = 2 ** 4 = 16 nums
+        N bits = 2 ** N nums
+        1 byte = 8 bits eg 00000000 11001000 11111111
+        How many numbers can 1 byte represent? 2 ** 8 = 256 numbers
+        
+        1 byte = 8 bits = 2 hex
+
+        0x to be clear its a hexadecimal value
+        0x3EA = 3 * 16 ** 2 + 14 * 16 ** 1 + 10 * 16 ** 0 = 1002
+    */
+    /*
       The prefix 0x is used in code to indicate that the number is being written in hex. ... The hexadecimal format has a base of 16, which means that each digit can represent up to 16 different values.
-  */
-  const demoIdHex = web3 && web3.utils.utf8ToHex(demoId!);
-  console.log("demoIdHex", demoIdHex);
+    */
+    // const demoIdHex = web3 && web3.utils.utf8ToHex(demoId!);
+    // console.log("demoIdHex", demoIdHex);
+    const orderHash =
+      web3 &&
+      web3.utils.soliditySha3(
+        { type: "bytes12", value: demoId! },
+        { type: "address", value: account.data }
+      );
+    console.log("orderHash", orderHash);
 
-  const orderHash =
-    web3 &&
-    web3.utils.soliditySha3(
-      { type: "bytes16", value: demoIdHex },
-      { type: "address", value: account.data }
-    );
-  console.log("orderHash", orderHash);
-
-  const emailHash = web3 && web3.utils.sha3("lim@gx.com");
-  console.log("emailHash", emailHash);
+    const emailHash = web3 && web3.utils.sha3("lim@gx.com");
+    console.log("emailHash", emailHash);
+  };
 
   return (
     <Layout>
       <p>Ethereum</p>
+      <button onClick={purchaseCourse}>Purchase</button>
       <div className="border rounded-md p-3 m-2">
         <strong className="underline">In Index</strong>
         <p>Metmask Network: {network.data}</p>

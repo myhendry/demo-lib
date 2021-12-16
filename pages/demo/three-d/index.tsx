@@ -374,6 +374,7 @@ const ThreeD: NextPage<Props> = (props) => {
               scale={new Array(3).fill(0.01)}
             />
           </Suspense>
+
           <Suspense fallback={null}>
             <Box1 position={[8, 1.5, 0]} />
           </Suspense>

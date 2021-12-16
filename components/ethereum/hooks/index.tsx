@@ -35,11 +35,12 @@ const NETWORKS: INetwork = {
 };
 
 // 2 Setup Hook
-export const setupHooks = (web3?: Web3, provider?: any) => {
+export const setupHooks = (web3?: Web3, provider?: any, contract?: any) => {
   // console.log("# of calls to set up hooks");
   return {
     useAccount: createAccountHook(web3, provider),
     useNetwork: createNetworkHook(web3, provider),
+    useOwnedCourses: createOwnedCoursesHook(web3, contract),
   };
 };
 
@@ -94,6 +95,10 @@ export const createAccountHook = (web3?: Web3, provider?: any) => () => {
     mutate,
     ...rest,
   };
+};
+
+export const createOwnedCoursesHook = (web3?: Web3, contract?: any) => () => {
+  return "Use Own Course is working";
 };
 
 export const createNetworkHook = (web3?: Web3, provider?: any) => () => {
@@ -166,6 +171,14 @@ export const useNetwork = (): {
   const swrRes = enhanceHook(useHooks((hooks: any) => hooks.useNetwork)());
   return {
     network: swrRes,
+  };
+};
+
+export const useOwnedCourses = (): { ownedCourses: { data: string } } => {
+  const res = useHooks((hooks: any) => hooks.useOwnedCourses)();
+
+  return {
+    ownedCourses: { data: res },
   };
 };
 

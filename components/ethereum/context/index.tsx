@@ -63,7 +63,7 @@ export const Web3Provider: React.FC = ({ children }) => {
           web3,
           contract: null,
           isLoading: false,
-          hooks: setupHooks(web3, provider),
+          hooks: setupHooks(web3, provider, contract),
         });
       } else {
         setWeb3Api((api) => ({
