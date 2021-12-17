@@ -128,8 +128,12 @@ const links = [
     name: "Images",
   },
   {
-    url: "/demo/ethereum",
-    name: "Ethereum",
+    url: "/demo/ethereum/marketplace",
+    name: "Eth MarketPlace",
+  },
+  {
+    url: "/demo/ethereum/demo",
+    name: "Eth Demo",
   },
   {
     url: "/demo/pdf",

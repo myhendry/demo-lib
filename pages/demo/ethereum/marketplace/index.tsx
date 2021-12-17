@@ -2,13 +2,13 @@ import React, { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 
-import { Layout } from "../../../components/common";
-import { useWeb3 } from "../../../components/ethereum/context";
-import { useEthPrice } from "../../../components/ethereum/hooks/useEthPrice";
+import { Layout } from "../../../../components/common";
+import { useWeb3 } from "../../../../components/ethereum/context";
+import { useEthPrice } from "../../../../components/ethereum/hooks/useEthPrice";
 import {
   useOwnedCourses,
   useWalletInfo,
-} from "../../../components/ethereum/hooks";
+} from "../../../../components/ethereum/hooks";
 import Details from "./details";
 
 // * Github Repo
@@ -26,11 +26,13 @@ interface ICard {
 }
 
 const Ethereum = (props: Props) => {
-  const { isLoading, requireInstall, connect, web3 } = useWeb3();
+  const { isLoading, requireInstall, connect, web3, contract } = useWeb3();
   const { account, network, canPurchaseCourse } = useWalletInfo();
   const { eth } = useEthPrice();
   const [demoId, setDemoId] = useState<string | null>();
   const { ownedCourses } = useOwnedCourses();
+  const [contractName, setContractName] = useState<string>("");
+  const [newName, setNewName] = useState<string>("");
 
   console.log("ownedCourses", ownedCourses.data);
 
@@ -46,6 +48,14 @@ const Ethereum = (props: Props) => {
       }
     };
     getData();
+  }, []);
+
+  useEffect(() => {
+    const getContractDetails = async () => {
+      const name = await contract.methods.name().call();
+      setContractName(name);
+    };
+    getContractDetails();
   }, []);
 
   const purchaseCourse = () => {
@@ -84,6 +94,7 @@ const Ethereum = (props: Props) => {
   return (
     <Layout>
       <p>Ethereum</p>
+      <p>{contractName}</p>
       <button onClick={purchaseCourse}>Purchase</button>
       <div className="border rounded-md p-3 m-2">
         <strong className="underline">In Index</strong>
@@ -160,6 +171,25 @@ const Ethereum = (props: Props) => {
         <p>
           ETH Per Item <strong>{eth.perItem} ETH</strong>
         </p>
+      </div>
+      <div className="border p-5 m-3">
+        <form
+          onSubmit={async (e: any) => {
+            e.preventDefault();
+            console.log(account.data);
+            await contract.methods
+              .change_name(newName)
+              .send({ from: account.data });
+          }}
+        >
+          <input
+            type="text"
+            value={newName}
+            placeholder="Name"
+            onChange={(e: any) => setNewName(e.target.value)}
+          />
+          <input type="submit" />
+        </form>
       </div>
       <div className="space-y-3">{renderCards(cards, canPurchaseCourse)}</div>
     </Layout>

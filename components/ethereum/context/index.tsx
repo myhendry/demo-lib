@@ -9,11 +9,11 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 
 import { setupHooks } from "../hooks";
-import { loadContract } from "../../../lib/eth/loadContract";
+import { loadContract } from "../../../lib/eth/demo/loadContract";
 
 interface IWeb3Context {
   provider: any;
-  web3: any;
+  web3: Web3 | undefined;
   contract: any;
   isLoading: boolean;
   hooks: any;
@@ -21,7 +21,7 @@ interface IWeb3Context {
 
 interface IWeb3ExtendedContext {
   provider: any;
-  web3: Web3;
+  web3: Web3 | undefined;
   //todo resolve typing for getHooks to use with swr
   // getHooks: () => any;
   //! below typing appropriate when using with useState only in useAccount
@@ -37,16 +37,37 @@ interface IWeb3ExtendedContext {
   requireInstall: boolean;
 }
 
+const createWeb3State = ({
+  web3,
+  provider,
+  contract,
+  isLoading,
+}: {
+  web3: Web3 | undefined;
+  provider: any;
+  contract: any;
+  isLoading: boolean;
+}) => {
+  return {
+    web3,
+    provider,
+    contract,
+    isLoading,
+    hooks: setupHooks({ web3, provider, contract }),
+  };
+};
+
 const Web3Context = createContext<IWeb3Context | null>(null);
 
 export const Web3Provider: React.FC = ({ children }) => {
-  const [web3Api, setWeb3Api] = useState<IWeb3Context>({
-    provider: null,
-    web3: null,
-    contract: null,
-    isLoading: true,
-    hooks: setupHooks(),
-  });
+  const [web3Api, setWeb3Api] = useState<IWeb3Context>(
+    createWeb3State({
+      web3: undefined,
+      provider: null,
+      contract: null,
+      isLoading: true,
+    })
+  );
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -56,15 +77,16 @@ export const Web3Provider: React.FC = ({ children }) => {
         const web3 = new Web3(provider as any);
 
         const contract = await loadContract("Demo", web3);
-        console.log("Demo contract", contract);
+        // console.log("Demo contract", contract);
 
-        setWeb3Api({
-          provider,
-          web3,
-          contract: null,
-          isLoading: false,
-          hooks: setupHooks(web3, provider, contract),
-        });
+        setWeb3Api(
+          createWeb3State({
+            web3,
+            provider,
+            contract,
+            isLoading: false,
+          })
+        );
       } else {
         setWeb3Api((api) => ({
           ...api,

@@ -35,12 +35,20 @@ const NETWORKS: INetwork = {
 };
 
 // 2 Setup Hook
-export const setupHooks = (web3?: Web3, provider?: any, contract?: any) => {
+export const setupHooks = ({
+  web3,
+  provider,
+  contract,
+}: {
+  web3?: Web3;
+  provider?: any;
+  contract?: any;
+}) => {
   // console.log("# of calls to set up hooks");
   return {
-    useAccount: createAccountHook(web3, provider),
-    useNetwork: createNetworkHook(web3, provider),
-    useOwnedCourses: createOwnedCoursesHook(web3, contract),
+    useAccount: createAccountHook(web3!, provider),
+    useNetwork: createNetworkHook(web3!, provider),
+    useOwnedCourses: createOwnedCoursesHook(web3!, contract),
   };
 };
 
