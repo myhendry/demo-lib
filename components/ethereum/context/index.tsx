@@ -72,12 +72,14 @@ export const Web3Provider: React.FC = ({ children }) => {
   useEffect(() => {
     const loadProvider = async () => {
       const provider = await detectEthereumProvider();
+      const web3 = new Web3(provider as any);
 
       if (provider) {
-        const web3 = new Web3(provider as any);
-
         const contract = await loadContract("Marketplace", web3);
-        // console.log("Demo contract", contract);
+        console.log("Marketplace contract", contract);
+
+        // const contractName = await contract?.methods.name().call();
+        // console.log("mpc", contractName);
 
         setWeb3Api(
           createWeb3State({

@@ -11,6 +11,7 @@ interface Props {}
 
 // https://github.com/myhendry/nft-marketplace
 // https://github.com/myhendry/nft
+// https://github.com/tomhirst/solidity-nextjs-starter/blob/main/pages/index.js
 // truffle migrate --network rinkeby
 const Demo = (props: Props) => {
   const [web3Api, setWeb3Api] = useState<{
@@ -18,13 +19,15 @@ const Demo = (props: Props) => {
     isProviderLoaded: boolean;
     provider: any;
     contract: any;
-    contractName: string;
+    error: string;
+    // contractName: string;
   }>({
     isProviderLoaded: false,
     web3: undefined,
     provider: undefined,
     contract: undefined,
-    contractName: "",
+    error: "",
+    // contractName: "",
   });
 
   const [name, setName] = useState<string>("");
@@ -44,6 +47,20 @@ const Demo = (props: Props) => {
     1337: "Ganache",
   };
 
+  const getContractName = async (contract: any) => {
+    try {
+      const contractName = await contract?.methods.name().call();
+
+      console.log("Demo contractName", contractName);
+    } catch (error) {
+      console.log(error);
+      setWeb3Api((prevState) => ({
+        ...prevState,
+        error: "Not Enough Gas",
+      }));
+    }
+  };
+
   // ! Provider
   const loadProvider = async () => {
     const provider = await detectEthereumProvider();
@@ -51,13 +68,19 @@ const Demo = (props: Props) => {
 
     if (provider) {
       const contract = await loadContract("Demo", web3);
-      const contractName = await contract?.methods.name().call();
+      console.log("Demo contract", contract);
+
+      // todo if call() here can result in Out of Gas error if use other networks other than Ganache
+      // const contractName = await contract?.methods.name().call();
+      // console.log("Demo contractName", contractName);
+
       setWeb3Api({
         web3,
         provider,
         contract,
         isProviderLoaded: true,
-        contractName,
+        error: "",
+        // contractName,
       });
     } else {
       setWeb3Api((api) => {
@@ -152,11 +175,16 @@ const Demo = (props: Props) => {
       ) : (
         <span>Looking for Web3...</span>
       )}
-      <p>Contract: {web3Api.contractName}</p>
+      <button onClick={() => getContractName(web3Api.contract)}>
+        Get Name
+      </button>
+      {/* <p>Contract: {web3Api.contractName}</p> */}
+      <p>{web3Api.error}</p>
       <div className="border rounded-md m-5 p-3">
         <form
           onSubmit={async (e: FormEvent) => {
             e.preventDefault();
+
             await web3Api.contract.methods
               .change_name(name)
               .send({ from: account })

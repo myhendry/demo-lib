@@ -41,6 +41,8 @@
 
 ### TODOS
 
+- [ ] Solidity Deployment to Rinkeby
+- [ ] Out of Gas
 - [x] CRUD Comments
 - [x] Cascade Delete Project & Comments
 - [x] Tags

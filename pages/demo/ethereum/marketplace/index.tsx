@@ -31,8 +31,8 @@ const Ethereum = (props: Props) => {
   const { eth } = useEthPrice();
   const [demoId, setDemoId] = useState<string | null>();
   const { ownedCourses } = useOwnedCourses();
-  const [contractName, setContractName] = useState<string>("");
-  const [newName, setNewName] = useState<string>("");
+  // const [contractName, setContractName] = useState<string>("");
+  // const [newName, setNewName] = useState<string>("");
 
   console.log("ownedCourses", ownedCourses.data);
 
@@ -115,9 +115,11 @@ const Ethereum = (props: Props) => {
           Loading
         </button>
       ) : account.data ? (
-        <button disabled className="bg-gray-200">
-          Hi There {account.isAdmin ? "Admin" : "User"}
-        </button>
+        <div>
+          <button disabled className="bg-gray-200">
+            Hi There {account.isAdmin ? "Admin" : "User"}
+          </button>
+        </div>
       ) : requireInstall ? (
         <button
           onClick={() =>
