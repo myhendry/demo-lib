@@ -40,7 +40,7 @@ export const Header = () => {
 
         <div className="items-center md:flex">
           <div className="flex flex-col md:flex-row md:mx-6">
-            <Link href={"/demo/ethereum"}>
+            <Link href={"/demo/ethereum/demo"}>
               <a className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0">
                 Ethereum
               </a>

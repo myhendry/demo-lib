@@ -50,13 +50,13 @@ const Ethereum = (props: Props) => {
     getData();
   }, []);
 
-  useEffect(() => {
-    const getContractDetails = async () => {
-      const name = await contract.methods.name().call();
-      setContractName(name);
-    };
-    getContractDetails();
-  }, []);
+  // useEffect(() => {
+  //   const getContractDetails = async () => {
+  //     const name = await contract.methods.name().call();
+  //     setContractName(name);
+  //   };
+  //   getContractDetails();
+  // }, []);
 
   const purchaseCourse = () => {
     /*
@@ -94,7 +94,7 @@ const Ethereum = (props: Props) => {
   return (
     <Layout>
       <p>Ethereum</p>
-      <p>{contractName}</p>
+      {/* <p>{contractName}</p> */}
       <button onClick={purchaseCourse}>Purchase</button>
       <div className="border rounded-md p-3 m-2">
         <strong className="underline">In Index</strong>
@@ -172,7 +172,7 @@ const Ethereum = (props: Props) => {
           ETH Per Item <strong>{eth.perItem} ETH</strong>
         </p>
       </div>
-      <div className="border p-5 m-3">
+      {/* <div className="border p-5 m-3">
         <form
           onSubmit={async (e: any) => {
             e.preventDefault();
@@ -190,7 +190,7 @@ const Ethereum = (props: Props) => {
           />
           <input type="submit" />
         </form>
-      </div>
+      </div> */}
       <div className="space-y-3">{renderCards(cards, canPurchaseCourse)}</div>
     </Layout>
   );

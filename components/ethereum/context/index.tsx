@@ -9,7 +9,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 
 import { setupHooks } from "../hooks";
-import { loadContract } from "../../../lib/eth/demo/loadContract";
+import { loadContract } from "../../../lib/eth/loadContract";
 
 interface IWeb3Context {
   provider: any;
@@ -76,7 +76,7 @@ export const Web3Provider: React.FC = ({ children }) => {
       if (provider) {
         const web3 = new Web3(provider as any);
 
-        const contract = await loadContract("Demo", web3);
+        const contract = await loadContract("Marketplace", web3);
         // console.log("Demo contract", contract);
 
         setWeb3Api(

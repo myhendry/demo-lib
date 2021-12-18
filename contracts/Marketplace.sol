@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-contract Demo {
+contract Marketplace {
     string public name;
     address private owner;
     
@@ -15,10 +15,7 @@ contract Demo {
         _;
     }
 
-    event ChangeName(address indexed user, string indexed new_name);
-
     function change_name(string memory new_name) external restricted {
         name = new_name;
-        emit ChangeName(msg.sender, new_name);
     }
 }
