@@ -11,6 +11,7 @@ interface Props {}
 
 // https://github.com/myhendry/nft-marketplace
 // https://github.com/myhendry/nft
+// truffle migrate --network rinkeby
 const Demo = (props: Props) => {
   const [web3Api, setWeb3Api] = useState<{
     web3: Web3 | undefined;
@@ -27,7 +28,6 @@ const Demo = (props: Props) => {
   });
 
   const [name, setName] = useState<string>("");
-  const [contractName, setContractName] = useState<string>("");
 
   // https://stackoverflow.com/questions/57086672/element-implicitly-has-an-any-type-because-expression-of-type-string-cant-b
   interface INetwork {
