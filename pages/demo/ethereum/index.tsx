@@ -12,13 +12,17 @@ const Ethereum: NextPage<IProps> = () => {
         <h1>Ethereum Local Demos</h1>
         <div className="flex flex-col space-y-5 mt-5">
           <Link href="/demo/ethereum/nft-hh">
-            <a className="p-3 border rounded-md text-center">NFT (HardHat)</a>
+            <a className="p-3 border rounded-md text-center cursor-pointer">
+              NFT (HardHat)
+            </a>
           </Link>
           <Link href="/demo/ethereum/demo-tf">
-            <a className="p-3 border rounded-md text-center">Demo (Truffle)</a>
+            <a className="p-3 border rounded-md text-center cursor-pointer">
+              Demo (Truffle)
+            </a>
           </Link>
           <Link href="/demo/ethereum/marketplace-tf">
-            <a className="p-3 border rounded-md text-center">
+            <a className="p-3 border rounded-md text-center cursor-pointer">
               Marketplace (Truffle)
             </a>
           </Link>
