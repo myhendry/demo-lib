@@ -128,16 +128,8 @@ const links = [
     name: "Images",
   },
   {
-    url: "/demo/ethereum/marketplace-tf",
-    name: "MarketPlace (Truffle)",
-  },
-  {
-    url: "/demo/ethereum/demo-tf",
-    name: "Demo (Truffle)",
-  },
-  {
-    url: "/demo/ethereum/nft-hh",
-    name: "NFT (Hardhat)",
+    url: "/demo/ethereum",
+    name: "Ethereum",
   },
   {
     url: "/demo/pdf",

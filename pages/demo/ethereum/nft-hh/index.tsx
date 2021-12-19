@@ -38,7 +38,9 @@ interface Props {}
 
   Cannot find localhost network
   -> Make sure run npx hardhat node in one terminal and then do npx hardhat run scripts/deploy.ts --network localhost in another terminal 
-*/
+
+  https://github.com/tomhirst/solidity-nextjs-starter
+  */
 interface INft {
   price: string;
   tokenId: string;
