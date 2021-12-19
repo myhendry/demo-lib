@@ -23,9 +23,21 @@ interface Props {}
   npx hardhat run scripts/deploy.ts --network localhost
 
   contracts, artifacts/contracts, config.js, scripts/deploy.ts,
-  
+
+  Configure Polygon on Metamask
+  https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/
+
+  Polygon Faucet
+  https://faucet.polygon.technology/
+
+  Deploying to Polygon Mumbai Testnet. Remember to update below 2 items
+  -> 1) config.js with new contract addresses 2) JsonRPCProvider - add in the polygon mumbai network http
+
   Solved! “Nonce too high” error with MetaMask and Hardhat
-  https://medium.com/@thelasthash/solved-nonce-too-high-error-with-metamask-and-hardhat-adc66f092cd
+  -> https://medium.com/@thelasthash/solved-nonce-too-high-error-with-metamask-and-hardhat-adc66f092cd
+
+  Cannot find localhost network
+  -> Make sure run npx hardhat node in one terminal and then do npx hardhat run scripts/deploy.ts --network localhost in another terminal 
 */
 interface INft {
   price: string;
@@ -48,6 +60,9 @@ export const Subheader = () => (
     <Link href={"/demo/ethereum/nft-hh/new"}>
       <a>New</a>
     </Link>
+    <Link href={"/demo/ethereum/nft-hh/dashboard"}>
+      <a>Dashboard</a>
+    </Link>
   </div>
 );
 
@@ -69,7 +84,7 @@ const NFTMarket = (props: Props) => {
       HHMarket.abi,
       provider
     );
-    const data = await marketContract.fetchUnsoldListingItems();
+    const data = await marketContract.fetchItemsMinted();
     console.log(tokenContract, marketContract, data);
     const contractName = await tokenContract.name();
     setContractName(contractName);

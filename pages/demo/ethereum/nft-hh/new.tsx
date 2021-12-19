@@ -90,7 +90,7 @@ const NewNFT: NextPage = (props) => {
       value: listingPrice,
     });
     await transaction.wait();
-    push("/");
+    push("/demo/ethereum/nft-hh");
   };
 
   const handleSubmit = async (e: any) => {
@@ -102,40 +102,48 @@ const NewNFT: NextPage = (props) => {
     <Layout>
       <Subheader />
       <h1>IPFS File Upload</h1>
-      {JSON.stringify(formInput)}
       <div>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Asset Name"
-            name="name"
-            onChange={(e) =>
-              updateFormInput({ ...formInput, name: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Asset Price"
-            name="price"
-            onChange={(e) =>
-              updateFormInput({ ...formInput, price: e.target.value })
-            }
-          />
-          <input
-            type="textarea"
-            placeholder="Asset Description"
-            name="description"
-            onChange={(e) =>
-              updateFormInput({ ...formInput, description: e.target.value })
-            }
-          />
-          <input
-            type="file"
-            placeholder="Asset Image"
-            name="image"
-            onChange={onChange}
-          />
-          <button>Mint</button>
+          <div className="space-y-3">
+            <input
+              type="text"
+              placeholder="Asset Name"
+              name="name"
+              onChange={(e) =>
+                updateFormInput({ ...formInput, name: e.target.value })
+              }
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+            <input
+              type="text"
+              placeholder="Asset Price"
+              name="price"
+              onChange={(e) =>
+                updateFormInput({ ...formInput, price: e.target.value })
+              }
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+            <input
+              type="textarea"
+              placeholder="Asset Description"
+              name="description"
+              onChange={(e) =>
+                updateFormInput({ ...formInput, description: e.target.value })
+              }
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+            <input
+              type="file"
+              placeholder="Asset Image"
+              name="image"
+              onChange={onChange}
+            />
+            <div className="flex justify-center w-screen">
+              <button className="px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                Mint
+              </button>
+            </div>
+          </div>
         </form>
         {fileUrl && <Image src={fileUrl} alt="bird" width={150} height={150} />}
       </div>
