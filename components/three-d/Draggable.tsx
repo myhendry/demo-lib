@@ -5,6 +5,7 @@ extend({ DragControls });
 
 interface Props {
   children: any;
+  transformGroup: any;
 }
 
 const Draggable = (props: Props) => {
@@ -36,10 +37,6 @@ const Draggable = (props: Props) => {
       // @ts-ignore
       scene.orbitControls.enabled = true;
     });
-    controlsRef.current!.addEventListener("drag", (e) => {
-      e.object.api?.position.copy(e.object.position);
-      e.object.api?.velocity.set(0, 0, 0);
-    });
     controlsRef.current!.addEventListener("dragstart", (e) => {
       console.log(e.object);
       console.log("scene", scene);
@@ -48,12 +45,17 @@ const Draggable = (props: Props) => {
     controlsRef.current!.addEventListener("dragend", (e) =>
       e.object.api?.mass.set(1)
     );
+    controlsRef.current!.addEventListener("drag", (e) => {
+      e.object.api?.position.copy(e.object.position);
+      e.object.api?.velocity.set(0, 0, 0);
+    });
   }, [children]);
 
   return (
     <group ref={groupRef}>
       {/* @ts-ignore */}
       <dragControls
+        transformGroup={props.transformGroup}
         ref={controlsRef}
         args={[children, camera, gl.domElement]}
       />

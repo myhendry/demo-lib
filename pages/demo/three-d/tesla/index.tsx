@@ -284,12 +284,36 @@ const Box6 = (props: any) => {
   );
 };
 
+const BoundingBox = ({
+  position = [0, 0, 0],
+  dims = [1, 1, 1],
+  offset = [0, 0, 0],
+  visible,
+  children,
+}) => {
+  const [ref, api] = useBox(() => ({
+    mass: 1,
+    args: dims as any,
+    position: position as any,
+  }));
+  return (
+    // @ts-ignore
+    <group ref={ref} api={api}>
+      <mesh scale={dims as any} visible={visible}>
+        <boxBufferGeometry />
+        <meshPhysicalMaterial wireframe />
+      </mesh>
+      <group position={offset as any}>{children}</group>
+    </group>
+  );
+};
+
 const Floor = (props: any) => {
   const [ref, api] = useBox(() => ({ args: [20, 1, 10], ...props }));
   return (
     <mesh ref={ref} {...props} receiveShadow>
-      <boxBufferGeometry args={[20, 1, 10]} />
-      <meshPhysicalMaterial color={"white"} />
+      <boxBufferGeometry args={[200, 1, 10]} />
+      <meshPhysicalMaterial color={"white"} opacity={1} />
     </mesh>
   );
 };
@@ -367,36 +391,51 @@ const ThreeD: NextPage<Props> = (props) => {
           <Box5 position={[-8, 1.5, 0]} />
         </Suspense>
         <Physics>
-          <Draggable>
-            <Suspense fallback={null}>
-              <Model
-                path="/images/tesla_model_3/scene.gltf"
-                position={[5, 1, 1]}
-                scale={new Array(3).fill(0.01)}
-              />
-            </Suspense>
-            <Suspense fallback={null}>
-              <Model
-                path="/images/tesla_model_s/scene.gltf"
+          <Suspense fallback={null}>
+            <Draggable transformGroup>
+              <BoundingBox
+                visible
+                position={[5, 3, 1]}
+                dims={[3, 2.6, 6.2]}
+                offset={[0, 0, 1]}
+              >
+                <Model
+                  path="/images/tesla_model_3/scene.gltf"
+                  scale={new Array(3).fill(0.01)}
+                />
+              </BoundingBox>
+            </Draggable>
+          </Suspense>
+          <Suspense fallback={null}>
+            <Draggable transformGroup>
+              <BoundingBox
+                visible
                 position={[0, 0.7, 1]}
-                scale={new Array(3).fill(0.01)}
-              />
-            </Suspense>
+                dims={[3, 2.6, 5.6]}
+                offset={[0, 0, 0.2]}
+              >
+                <Model
+                  path="/images/tesla_model_s/scene.gltf"
+                  scale={new Array(3).fill(0.01)}
+                />
+              </BoundingBox>
+            </Draggable>
+          </Suspense>
+          <Floor postition={[0, 0, 0]} />
 
-            <Suspense fallback={null}>
+          <Suspense fallback={null}>
+            <Draggable transformGroup>
               <Box1 position={[8, 1.5, 0]} />
-            </Suspense>
-            <Suspense fallback={null}>
-              <Sphere1 position={[8, 1.5, 2]} />
-            </Suspense>
-            <Floor postition={[0, 0, 0]} />
-          </Draggable>
+            </Draggable>
+          </Suspense>
+          <Suspense fallback={null}>
+            <Sphere1 position={[8, 1.5, 2]} />
+          </Suspense>
           <Suspense fallback={null}>
             <Box6 position={[-5, 1.5, 2]} />
           </Suspense>
-
-          <axesHelper args={[3]} />
         </Physics>
+        <axesHelper args={[3]} />
       </Canvas>
     </div>
   );
