@@ -1,8 +1,7 @@
 import React, { Suspense } from "react";
-import { BoundingBox } from ".";
 
 import { Draggable } from "./dragable";
-// import { BoundingBox } from "./bounding-box";
+import { BoundingBox } from "./bounding-box";
 import { Model } from "./model";
 
 interface Props {
