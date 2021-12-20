@@ -1,10 +1,15 @@
 import * as THREE from "three";
 
-export const Bulb2 = (props) => {
+interface IProps {
+  dims: any;
+  position: any;
+}
+
+export const Bulb = (props: IProps) => {
   return (
     <mesh {...props}>
       <pointLight castShadow />
-      <sphereBufferGeometry args={[0.2, 20, 20]} />
+      <sphereBufferGeometry args={props.dims} />
       <meshPhongMaterial emissive={new THREE.Color(0xff0000)} />
     </mesh>
   );

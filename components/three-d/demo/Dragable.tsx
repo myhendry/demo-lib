@@ -8,7 +8,7 @@ interface Props {
   transformGroup: any;
 }
 
-const Draggable = (props: Props) => {
+export const Draggable = (props: Props) => {
   const groupRef = useRef<any>();
   const controlsRef = useRef<DragControls>();
   const [children, setChildren] = useState<any[]>([]);
@@ -57,5 +57,3 @@ const Draggable = (props: Props) => {
     </group>
   );
 };
-
-export default Draggable;

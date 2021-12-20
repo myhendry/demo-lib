@@ -9,12 +9,10 @@ interface Props {
 }
 
 // https://sketchfab.com/
-const Model = ({ path, ...props }: Props) => {
+export const Model = ({ path, ...props }: Props) => {
   //console.log("props", props);
 
   const model = useLoader(GLTFLoader, path);
 
   return <primitive object={model.scene} scale={props.scale} {...props} />;
 };
-
-export default Model;
