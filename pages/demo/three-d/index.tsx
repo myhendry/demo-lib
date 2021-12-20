@@ -14,9 +14,9 @@ const ThreeD: NextPage<IProps> = () => {
             Tesla 3D
           </a>
         </Link>
-        <Link href="/demo/three-d/playground">
+        <Link href="/demo/three-d/demo">
           <a className="p-3 border rounded-md text-center cursor-pointer">
-            Playground 3D
+            Demo 3D
           </a>
         </Link>
       </div>

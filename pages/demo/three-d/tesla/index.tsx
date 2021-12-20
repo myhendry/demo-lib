@@ -345,7 +345,7 @@ const ThreeD: NextPage<Props> = (props) => {
   return (
     <div className="h-screen w-screen">
       <div className="flex justify-end cursor-pointer bg-black">
-        <Link href={"/"}>
+        <Link href={"/demo/three-d"}>
           <a className="text-white p-2">Go Back</a>
         </Link>
       </div>
