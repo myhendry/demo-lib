@@ -11,7 +11,7 @@ import {
   Car,
   Floor,
   NudeGirl,
-} from "../../../../components/three-d/demo";
+} from "../../../../components/three-d/playground";
 
 // https://docs.pmnd.rs/react-three-fiber/getting-started/examples?utm_source=pocket_mylist
 
