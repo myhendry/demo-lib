@@ -1,3 +1,5 @@
+[How to build stunning 3D scenes with React Three Fiber](https://varun.ca/modular-webgl/) \
+
 // Solidity & Ethereum in React (Next JS): The Complete Guide
 // NEXT: L184
 

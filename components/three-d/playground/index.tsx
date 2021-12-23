@@ -6,3 +6,4 @@ export * from "./model";
 export * from "./background";
 export * from "./bounding-box";
 export * from "./nude-girl";
+export * from "./box";

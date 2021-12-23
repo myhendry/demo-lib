@@ -11,7 +11,7 @@ export const Floor = (props: Props) => {
   return (
     <mesh ref={ref} {...props} receiveShadow>
       <boxBufferGeometry args={[200, 1, 200]} />
-      <meshPhysicalMaterial color={"white"} opacity={1} />
+      <meshPhysicalMaterial color="#ff0000" opacity={0.1} transparent />
     </mesh>
   );
 };

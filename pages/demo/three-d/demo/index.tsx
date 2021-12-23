@@ -7,6 +7,7 @@ import { Physics } from "@react-three/cannon";
 
 import {
   Background,
+  Box,
   Bulb,
   Car,
   Floor,
@@ -25,7 +26,7 @@ const Demo: NextPage<IProps> = () => {
           <a className="p-2 tracking-widest">Go Back</a>
         </Link>
       </div>
-      <Canvas style={{ background: "white" }} camera={{ position: [3, 3, 3] }}>
+      <Canvas style={{ background: "white" }} camera={{ position: [3, 6, 3] }}>
         <ambientLight intensity={0.7} />
         <Stats />
         <OrbitControls attach="orbitControls" />
@@ -36,8 +37,10 @@ const Demo: NextPage<IProps> = () => {
         <Physics>
           <Car />
           <NudeGirl />
-          <Floor position={[0, -0.5, 0]} />
+          <Box position={[-5, 0, 0]} />
+          <Floor position={[0, -1, 0]} />
         </Physics>
+        <axesHelper args={[5]} />
       </Canvas>
     </div>
   );

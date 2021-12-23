@@ -3,7 +3,10 @@ import { useLoader, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 export const Background = (props: any) => {
-  const texture = useLoader(THREE.TextureLoader, "/images/autoshop.jpg");
+  const texture = useLoader(
+    THREE.TextureLoader,
+    "/images/lone-road-desert.jpg"
+  );
 
   const { gl } = useThree();
 
