@@ -5,7 +5,7 @@
 
 [LAB TODOS](#todos)
 
-[GITHUB REFERENCE CODES](#github_reference_codes)
+GITHUB REFERENCE CODES](#github_reference_codes)
 
 [VIM SHORTCUT](#vim)
 
@@ -1075,6 +1075,23 @@ git push
 rename github repo
 
 git remote set-url origin  // Update git remote
+
+# COLLABORATION
+
+git clone <repo> <name>
+git remote -v
+git pull origin main
+git checkout -b <new_branch_name>
+--add content--
+git add .
+git commit -m '<message>'
+git push <new_branch_name>
+--go to github page--
+Click on button 'Compare and Pull Request'
+Enter Message and Click on button 'Create Pull Request'
+If No Conflicts, can Click on 'Merge Request'
+Can 'Delete Branch' After Merge
+
 
 // RENAME FILE AND DIRECTORY
 
