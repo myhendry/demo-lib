@@ -1076,6 +1076,11 @@ rename github repo
 
 git remote set-url origin  // Update git remote
 
+// MULTIPLE GIT REPO
+
+git remote add <id> <url.git>
+git push <id>
+
 # COLLABORATION
 
 git clone <repo> <name>
