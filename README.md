@@ -1114,6 +1114,13 @@ One of two things will happen:
 
 If /home/user/newname doesn't exist, it will rename /home/user/oldname to /home/user/newname
 If /home/user/newname exists, it will move /home/user/oldname into /home/user/newname, i.e. /home/user/newname/oldname
+
+// EXPO
+
+Warning: Invalid version react-native@0.64.2 for expo sdkVersion 43.0.0. Use react-native@0.64.3
+
+expo doctor                       // OR
+npx react-native upgrade 0.64.3
 ```
 
 ### MARKDOWN
