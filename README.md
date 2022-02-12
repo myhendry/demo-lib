@@ -1019,6 +1019,9 @@ In other words one asterisk * ends before next "/", two asterisks ** have no lim
 ### TERMINAL
 
 ```
+lsof -i:8080
+kill -9 <PID 30268>
+
 npm i <package>
 npm i -D <package>
 npm uninstall <package>
