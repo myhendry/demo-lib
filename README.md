@@ -62,6 +62,7 @@ GITHUB REFERENCE CODES](#github_reference_codes)
 ### VIM
 
 ```
+SHIFT + OPTION + <- OR ->
 
 ciw // cut word
 
@@ -84,9 +85,12 @@ ENTER // Replace One Instance of Word
 CMD + SPACE // Spotlight
 CMD + TAB // Choose Apps
 CMD + SHIFT + P
+CMD + W   // Close Tab
+CMD + K + W // Close All Opened Tabs
 
 CMD + K + E     // Fold Explorer Tabs
 CMD + SHIFT + E // Go to Explorer
+CMD + SHIFT + O // List All Properties, Functions and Methods
 
 OPTION + CMD + F  // Find and Replace in File
 CMD + ENTER  // Replace All  OR ENTER // Replace One by One
@@ -102,6 +106,12 @@ Fold Selected     // Option + Cmd + [
 Unfold Selected   // Option + Cmd + ]
 Fold All          // Cmd + K, Cmd + 0
 Unfold All        // Cmd + K Cmd + J
+
+OPTION + 1 or 2 or 3... // to choose Opened Tab
+
+CMD + O   // Go to Definition
+CMD + I   // Navigate Back
+
 ```
 
 ### GITHUB REFERENCE CODES
